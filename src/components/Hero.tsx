@@ -1,0 +1,129 @@
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { ChevronDown, Heart } from 'lucide-react';
+
+interface HeroProps {
+  event?: string | null;
+  inviteeName?: string;
+}
+
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReduced(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  return reduced;
+}
+
+function useIsTouchDevice() {
+  const [touch, setTouch] = useState(false);
+
+  useEffect(() => {
+    setTouch(window.matchMedia('(hover: none) and (pointer: coarse)').matches);
+  }, []);
+
+  return touch;
+}
+
+export const Hero: React.FC<HeroProps> = ({ event = 'both', inviteeName }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const reducedMotion = usePrefersReducedMotion();
+  const isTouch = useIsTouchDevice();
+  const useParallax = !reducedMotion && !isTouch;
+
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 1000], [0, 400]);
+  const scale = useTransform(scrollY, [0, 800], [1, 1.1]);
+  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
+
+  const [videoEnded, setVideoEnded] = useState(false);
+
+  return (
+    <div ref={containerRef} className="relative h-[min(860px,100vh)] min-h-[680px] flex items-center justify-center overflow-hidden bg-[#5c3e13]">
+      <motion.div
+        className="absolute inset-0 z-0 origin-center"
+        style={useParallax ? { y: y1, scale } : undefined}
+      >
+        <video
+          src="/intro.mp4"
+          className="w-full h-full object-cover"
+          style={{ objectPosition: 'center 20%' }}
+          autoPlay
+          muted
+          playsInline
+          onEnded={(e) => {
+             // Pauses exactly at the last frame
+             e.currentTarget.pause();
+             setVideoEnded(true);
+          }}
+        />
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#2e1b0d]/45 via-transparent to-[#2e1b0d]/75" />
+        <div className="absolute inset-5 z-20 rounded-[2rem] border border-[#f5e8c9]/45 sm:inset-8 sm:rounded-[2.75rem]" />
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.35 }}
+          className="relative z-20 mx-auto mt-[-2rem] max-w-3xl px-6 text-center text-[#fffaf0]"
+        >
+          <div className="mx-auto my-6 flex items-center justify-center gap-3">
+            <span className="h-px w-12 bg-gradient-to-r from-transparent to-[#e6c77b]" />
+            <Heart className="h-4 w-4 fill-[#e6c77b] text-[#e6c77b]" />
+            <span className="h-px w-12 bg-gradient-to-l from-transparent to-[#e6c77b]" />
+          </div>
+          <p className="font-serif text-xl italic text-[#fffaf0]/90 sm:text-2xl">
+            invite you to celebrate their wedding
+          </p>
+          <p className="mt-5 text-[0.68rem] uppercase tracking-[0.35em] text-[#f4d98d]">
+            Sunday · June 14 · 2027
+          </p>
+        </motion.div>
+      </motion.div>
+
+
+
+      <AnimatePresence>
+        {videoEnded && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="absolute inset-0 z-10 pointer-events-none"
+          >
+            <div className="absolute inset-5 sm:inset-8 border border-[#e6c77b]/30 rounded-3xl shadow-[inset_0_0_30px_rgba(201,169,110,0.1)]" />
+            <div className="absolute inset-6 sm:inset-9 border border-[#e6c77b]/15 rounded-[1.3rem]" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {videoEnded && (
+          <motion.div
+            className="absolute bottom-10 sm:bottom-14 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 cursor-pointer z-30"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}
+          >
+            <div className="flex flex-col items-center gap-2 bg-black/20 hover:bg-black/40 transition-colors backdrop-blur-md px-6 py-4 rounded-full border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+              <span className="text-[10px] font-sans uppercase tracking-[0.4em] text-white font-medium pl-1">
+                Scroll Down
+              </span>
+              <motion.div 
+                animate={{ y: [0, 5, 0] }} 
+                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+              >
+                <ChevronDown className="w-5 h-5 text-white" />
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};

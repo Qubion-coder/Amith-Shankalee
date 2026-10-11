@@ -1,0 +1,93 @@
+import React from 'react';
+import { motion } from 'motion/react';
+import { Clock, Calendar, Sparkles } from 'lucide-react';
+
+interface CeremonyDetailsProps {
+  event?: string | null;
+}
+
+export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both' }) => {
+  const isHomecoming = event === 'homecoming';
+
+  return (
+    <div className="mx-auto max-w-6xl px-6 sm:px-7">
+      {/* Premium ambient backdrop */}
+      <div className="absolute top-0 right-0 w-[80%] h-[80%] bg-gradient-radial from-brand-lavender/10 to-transparent rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="relative overflow-hidden rounded-[2rem] border border-[#c7a24b]/25 bg-[#fffdf8] px-6 py-12 shadow-[0_24px_65px_-45px_rgba(70,40,30,0.7)] sm:rounded-[3rem] sm:px-12 sm:py-16 lg:px-20">
+        <Sparkles className="absolute right-8 top-8 h-5 w-5 text-[#c7a24b]/50" />
+        <div className="mb-12 text-center">
+          <span className="mb-3 block text-[0.7rem] uppercase tracking-[0.35em] text-[#365c91]">A day to remember</span>
+          <h2 className="font-names text-2xl tracking-[0.08em] text-[#5c3e13] sm:text-4xl">THE <span className="text-[#c7a24b]">CELEBRATION</span></h2>
+          <div className="mx-auto mt-5 h-px w-20 bg-gradient-to-r from-transparent via-[#c7a24b] to-transparent" />
+        </div>
+      <div className="flex flex-col items-center gap-12 lg:flex-row lg:gap-20">
+        {/* Left Side: Text Content */}
+        <div className="lg:w-1/2 relative z-10 w-full">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+          >
+            <div className="inline-flex items-center gap-4 mb-6">
+              <span className="text-brand-plum uppercase tracking-[0.4em] sm:tracking-[0.5em] text-[11px] sm:text-xs font-bold drop-shadow-sm">
+                With joyful hearts
+              </span>
+              <div className="w-12 sm:w-20 h-[1px] bg-gradient-to-r from-brand-plum/60 to-transparent" />
+            </div>
+
+            <h2 className="font-names text-3xl font-semibold leading-tight tracking-[0.07em] text-[#5c3e13] sm:text-5xl lg:text-6xl">
+                <>JOIN US FOR A <br /><span className="text-[#c7a24b]">BEAUTIFUL BEGINNING</span></>
+            </h2>
+
+            <p className="text-stone-500/90 font-serif text-lg sm:text-xl leading-relaxed mb-16 max-w-lg">
+                With joyful hearts, we invite you to celebrate the beginning of our forever.
+            </p>
+
+            {/* Premium Timeline */}
+            <div className="relative space-y-12 ml-10 sm:ml-12 border-l-[1.5px] border-brand-lavender/30 pl-10 sm:pl-12 py-4">
+
+              {/* Date */}
+              <div className="relative group flex items-center min-h-[48px]">
+                <div className="absolute top-1/2 -translate-y-1/2 -left-[64px] sm:-left-[74px] w-12 h-12 bg-white rounded-full border border-brand-lavender/40 shadow-lg flex items-center justify-center group-hover:border-brand-plum group-hover:shadow-[0_4px_15px_rgba(176,137,104,0.3)] transition-all duration-500">
+                  <Calendar className="w-5 h-5 text-[#365c91] group-hover:scale-110 transition-transform duration-500" />
+                </div>
+                <div>
+                  <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 group-hover:text-brand-plum transition-colors duration-500">
+                    Sunday, June 14, 2027
+                  </h4>
+                </div>
+              </div>
+
+              {/* Church Ceremony */}
+              <div className="relative group">
+                <div className="absolute top-1/2 -translate-y-1/2 -left-[64px] sm:-left-[74px] w-12 h-12 bg-white rounded-full border border-brand-lavender/40 shadow-lg flex items-center justify-center group-hover:border-brand-plum group-hover:shadow-[0_4px_15px_rgba(176,137,104,0.3)] transition-all duration-500">
+                  <Clock className="w-5 h-5 text-[#365c91] group-hover:scale-110 transition-transform duration-500" />
+                </div>
+                <div>
+                  <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-3 group-hover:text-brand-plum transition-colors duration-500">
+                    Wedding Ceremony
+                  </h4>
+                  <div className="space-y-1.5 text-stone-500/90 font-serif text-base sm:text-lg">
+                    <p>
+                      <span className="font-semibold text-stone-700">Time:</span> 04.00 PM
+                    </p>
+                    <p className="leading-relaxed">
+                      <span className="font-semibold text-stone-700">Venue:</span> Shangri-La Colombo,<br className="hidden sm:block" /> 1 Galle Face
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </motion.div>
+        </div>
+
+
+      </div>
+      </div>
+    </div>
+  );
+};
