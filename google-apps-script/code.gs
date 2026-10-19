@@ -1,35 +1,24 @@
-const SPREADSHEET_ID = '1IYsTHUnfOIHGcwQvoTcjOc5X2wKZJDIrqxqxXtpVpZY';
+const SPREADSHEET_ID = '1LfNrietRs02HX439SHtG86yjRzrleCFNJb5Dnw2cwGE';
+
+const SHEET_NAME = 'RSVP';
+const HEADERS = ['Timestamp', 'Full Name', 'Attendance', 'Guests', 'Message'];
 
 function doPost(e) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+
   try {
     const payload = parsePayload_(e);
-    const sheetKey = String(payload.sheet || '').toUpperCase();
+    const sheet = getOrCreateSheet_();
+    const attending = String(payload.attendance || '').toLowerCase() === 'yes';
 
-    if (sheetKey !== 'RSVP' && sheetKey !== 'WISH') {
-      return jsonResponse_({ ok: false, error: 'Invalid sheet. Use RSVP or WISH.' });
-    }
-
-    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
-    const sheet = getOrCreateSheet_(ss, sheetKey);
-
-    if (sheetKey === 'RSVP') {
-      ensureHeaders_(sheet, ['Timestamp', 'Full Name', 'Guests', 'Event', 'Dietary Notes']);
-      sheet.appendRow([
-        new Date(),
-        payload.fullName || '',
-        payload.guests || '',
-        payload.event || '',
-        payload.dietaryNotes || '',
-      ]);
-    } else {
-      ensureHeaders_(sheet, ['Timestamp', 'Name', 'Event', 'Message']);
-      sheet.appendRow([
-        new Date(),
-        payload.name || '',
-        payload.event || '',
-        payload.message || '',
-      ]);
-    }
+    sheet.appendRow([
+      new Date(),
+      payload.fullName || '',
+      attending ? 'Attending' : 'Not attending',
+      attending ? Number(payload.guests || 1) : 0,
+      payload.thoughts || '',
+    ]);
 
     return jsonResponse_({ ok: true });
   } catch (error) {
@@ -37,6 +26,8 @@ function doPost(e) {
       ok: false,
       error: String(error && error.message ? error.message : error),
     });
+  } finally {
+    lock.releaseLock();
   }
 }
 
@@ -45,6 +36,31 @@ function doGet() {
     ok: true,
     message: 'Wedding form endpoint is running.',
   });
+}
+
+// Run once from the Apps Script editor to create the RSVP tab with headers.
+function setup() {
+  getOrCreateSheet_();
+}
+
+function getOrCreateSheet_() {
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  let sheet = ss.getSheetByName(SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(SHEET_NAME);
+  }
+
+  if (sheet.getLastRow() === 0) {
+    sheet.getRange(1, 1, 1, HEADERS.length)
+      .setValues([HEADERS])
+      .setFontWeight('bold')
+      .setBackground('#f6efe1');
+    sheet.setFrozenRows(1);
+    sheet.getRange('A:A').setNumberFormat('dd MMM yyyy, hh:mm a');
+    sheet.autoResizeColumns(1, HEADERS.length);
+  }
+
+  return sheet;
 }
 
 function parsePayload_(e) {
@@ -88,20 +104,6 @@ function parseQueryString_(query) {
   }
 
   return out;
-}
-
-function getOrCreateSheet_(ss, name) {
-  let sheet = ss.getSheetByName(name);
-  if (!sheet) {
-    sheet = ss.insertSheet(name);
-  }
-  return sheet;
-}
-
-function ensureHeaders_(sheet, headers) {
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(headers);
-  }
 }
 
 function jsonResponse_(data) {
