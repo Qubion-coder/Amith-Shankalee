@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { CheckCircle, Loader2, Heart, Sparkles, Phone, ChevronDown } from 'lucide-react';
+import { CheckCircle, Loader2, Heart, Sparkles, Phone } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface RSVPFormProps {
@@ -12,15 +12,6 @@ interface RSVPFormProps {
 export const RSVPForm: React.FC<RSVPFormProps> = ({ inviteeName = '', eventName = 'the celebration', eventParam = 'both' }) => {
   const searchParams = new URLSearchParams(window.location.search);
   const guestsParam = searchParams.get('guests') || '1';
-
-  const guestOptions = [
-    { value: '1', label: 'Only me' },
-    { value: '2', label: 'We both' },
-    ...['3', '4', '5', '6'].map((n) => ({ value: n, label: `${n} guests` })),
-  ];
-  if (!guestOptions.some((option) => option.value === guestsParam)) {
-    guestOptions.push({ value: guestsParam, label: `${guestsParam} guests` });
-  }
 
   const [formData, setFormData] = useState({
     fullName: inviteeName,
@@ -166,20 +157,15 @@ export const RSVPForm: React.FC<RSVPFormProps> = ({ inviteeName = '', eventName 
                 </div>
 
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.2em] font-bold text-stone-500 mb-2 ml-2">Guests Attending</label>
-                  <div className="relative">
-                    <select
-                      className="w-full appearance-none bg-white/80 px-6 py-3 pr-12 rounded-full border border-stone-200/60 focus:ring-2 focus:ring-brand-lavender/30 focus:border-brand-plum/40 outline-none transition-all duration-300 font-serif italic text-base shadow-inner text-stone-700 cursor-pointer"
-                      value={formData.guests}
-                      onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
-                    >
-                      {guestOptions.map((option) => (
-                        <option key={option.value} value={option.value}>{option.label}</option>
-                      ))}
-                    </select>
-                    <ChevronDown className="pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-400" />
-                  </div>
-                  <p className="text-[9px] text-stone-400 mt-1.5 ml-3 italic">How many of you will be attending</p>
+                  <label className="block text-[10px] uppercase tracking-[0.2em] font-bold text-stone-500 mb-2 ml-2">Reserved Seats</label>
+                  <input
+                    type="number"
+                    min="1"
+                    className="w-full bg-white/80 px-6 py-3 rounded-full border border-stone-200/60 focus:ring-2 focus:ring-brand-lavender/30 focus:border-brand-plum/40 outline-none transition-all duration-300 font-serif italic text-base shadow-inner placeholder:text-stone-300"
+                    value={formData.guests}
+                    onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
+                  />
+                  <p className="text-[9px] text-stone-400 mt-1.5 ml-3 italic">Number of seats you will be taking</p>
                 </div>
 
                 <div>
