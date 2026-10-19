@@ -80,7 +80,7 @@ export const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
           ))}
         </div>
 
-        <p className="mt-9 text-sm italic text-[#fffdf8]/75">Until we celebrate with you at Shangri-La Colombo</p>
+        <p className="mt-9 text-sm italic text-[#fffdf8]/75">Until we celebrate with you in Wennappuwa &amp; Waikkal</p>
       </div>
     </section>
   );

@@ -5,6 +5,7 @@ import { ChevronDown, Heart } from 'lucide-react';
 interface HeroProps {
   event?: string | null;
   inviteeName?: string;
+  onVideoStart?: () => void;
 }
 
 function usePrefersReducedMotion() {
@@ -31,7 +32,7 @@ function useIsTouchDevice() {
   return touch;
 }
 
-export const Hero: React.FC<HeroProps> = ({ event = 'both', inviteeName }) => {
+export const Hero: React.FC<HeroProps> = ({ event = 'both', inviteeName, onVideoStart }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const reducedMotion = usePrefersReducedMotion();
   const isTouch = useIsTouchDevice();
@@ -43,18 +44,32 @@ export const Hero: React.FC<HeroProps> = ({ event = 'both', inviteeName }) => {
   const opacity = useTransform(scrollY, [0, 400], [1, 0]);
 
   const [videoEnded, setVideoEnded] = useState(false);
+  const [videoStarted, setVideoStarted] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const startVideo = () => {
+    if (videoStarted || !videoRef.current) return;
+    setVideoStarted(true);
+    videoRef.current.play().catch(console.error);
+    onVideoStart?.();
+  };
 
   return (
-    <div ref={containerRef} className="relative h-[min(860px,100vh)] min-h-[680px] flex items-center justify-center overflow-hidden bg-[#5c3e13]">
+    <div
+      ref={containerRef}
+      className={`relative h-[min(860px,100vh)] min-h-[680px] flex items-center justify-center overflow-hidden bg-[#5c3e13] ${videoStarted ? '' : 'cursor-pointer'}`}
+      onClick={startVideo}
+    >
       <motion.div
         className="absolute inset-0 z-0 origin-center"
         style={useParallax ? { y: y1, scale } : undefined}
       >
         <video
-          src="/intro.mp4"
+          ref={videoRef}
+          src="/intro.mp4#t=0.001"
           className="w-full h-full object-cover"
           style={{ objectPosition: 'center 20%' }}
-          autoPlay
+          preload="auto"
           muted
           playsInline
           onEnded={(e) => {
@@ -80,7 +95,7 @@ export const Hero: React.FC<HeroProps> = ({ event = 'both', inviteeName }) => {
             invite you to celebrate their wedding
           </p>
           <p className="mt-5 text-[0.68rem] uppercase tracking-[0.35em] text-[#f4d98d]">
-            Sunday · June 14 · 2027
+            Tuesday · December 15 · 2026
           </p>
         </motion.div>
       </motion.div>

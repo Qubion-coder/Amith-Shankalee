@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { CheckCircle, Loader2, Heart, Sparkles } from 'lucide-react';
+import { CheckCircle, Loader2, Heart, Sparkles, Phone } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface RSVPFormProps {
@@ -94,6 +94,20 @@ export const RSVPForm: React.FC<RSVPFormProps> = ({ inviteeName = '', eventName 
               : `Your presence means the world to us. Please kindly let us know if you will be able to join our celebration.`
             }
           </p>
+
+          <div className="mb-6 inline-flex flex-col items-center gap-3 rounded-[1.5rem] border border-[#c7a24b]/30 bg-white/70 px-6 py-5 shadow-[0_12px_28px_-20px_rgba(70,40,30,0.5)] lg:items-start">
+            <span className="text-[10px] uppercase tracking-[0.35em] font-bold text-[#365c91]">R.S.V.P</span>
+            <p className="font-serif text-base sm:text-lg text-stone-600">
+              Kindly reply by <span className="font-semibold text-stone-800">08th December 2026</span>
+            </p>
+            <a
+              href="tel:+94770610141"
+              className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-br from-[#365c91] to-[#203c68] px-6 py-3 text-sm font-semibold tracking-[0.15em] text-[#f6efdd] shadow-[0_14px_26px_-14px_rgba(54,92,145,0.7)] transition-transform duration-200 hover:-translate-y-0.5 active:scale-95"
+            >
+              <Phone className="h-4 w-4" strokeWidth={1.8} />
+              077 061 0141
+            </a>
+          </div>
 
           <div className="w-12 h-[1px] bg-brand-lavender/50 mx-auto lg:mx-0" />
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Clock, Calendar, Sparkles } from 'lucide-react';
+import { Clock, Calendar, Sparkles, UtensilsCrossed } from 'lucide-react';
 
 interface CeremonyDetailsProps {
   event?: string | null;
@@ -55,7 +55,7 @@ export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both'
                 </div>
                 <div>
                   <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 group-hover:text-brand-plum transition-colors duration-500">
-                    Sunday, June 14, 2027
+                    Tuesday, 15th December 2026
                   </h4>
                 </div>
               </div>
@@ -67,14 +67,34 @@ export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both'
                 </div>
                 <div>
                   <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-3 group-hover:text-brand-plum transition-colors duration-500">
-                    Wedding Ceremony
+                    Church Ceremony
                   </h4>
                   <div className="space-y-1.5 text-stone-500/90 font-serif text-base sm:text-lg">
                     <p>
                       <span className="font-semibold text-stone-700">Time:</span> 04.00 PM
                     </p>
                     <p className="leading-relaxed">
-                      <span className="font-semibold text-stone-700">Venue:</span> Shangri-La Colombo,<br className="hidden sm:block" /> 1 Galle Face
+                      <span className="font-semibold text-stone-700">Venue:</span> St. Joseph's Church,<br className="hidden sm:block" /> Wennappuwa
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Wedding Ceremony & Reception */}
+              <div className="relative group">
+                <div className="absolute top-1/2 -translate-y-1/2 -left-[64px] sm:-left-[74px] w-12 h-12 bg-white rounded-full border border-brand-lavender/40 shadow-lg flex items-center justify-center group-hover:border-brand-plum group-hover:shadow-[0_4px_15px_rgba(176,137,104,0.3)] transition-all duration-500">
+                  <UtensilsCrossed className="w-5 h-5 text-[#365c91] group-hover:scale-110 transition-transform duration-500" />
+                </div>
+                <div>
+                  <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-3 group-hover:text-brand-plum transition-colors duration-500">
+                    Wedding Ceremony &amp; Dinner Reception
+                  </h4>
+                  <div className="space-y-1.5 text-stone-500/90 font-serif text-base sm:text-lg">
+                    <p>
+                      <span className="font-semibold text-stone-700">Time:</span> 06.00 PM
+                    </p>
+                    <p className="leading-relaxed">
+                      <span className="font-semibold text-stone-700">Venue:</span> Suriya Resort,<br className="hidden sm:block" /> Waikkal
                     </p>
                   </div>
                 </div>

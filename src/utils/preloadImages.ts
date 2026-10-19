@@ -17,9 +17,9 @@ export function preloadImages(urls: string[]): Promise<void> {
 }
 
 export const INVITATION_IMAGE_URLS = [
-  '/IMG_6940.JPG.jpeg',
-  '/IMG_6941.JPG.jpeg',
-  '/IMG_6942.JPG.jpeg',
-  '/IMG_6945.JPG.jpeg',
-  '/ivory_satin_bow-removebg-preview.png',
+  '/WhatsApp Image 2026-10-16 at 20.40.02.jpeg',
+  '/icon_arrive.jpg',
+  '/icon_church.jpg',
+  '/icon_eat.jpg',
+  '/icon_dance.jpg',
 ] as const;

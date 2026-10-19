@@ -3,8 +3,8 @@ import { motion } from 'motion/react';
 
 const events = [
   { time: '3:30 PM', title: 'Welcome', desc: 'Guests arrive', icon: '/icon_arrive.jpg' },
-  { time: '4:00 PM', title: 'Ceremony', desc: 'The celebration begins', icon: '/icon_celebrate.jpg' },
-  { time: '6:00 PM', title: 'Dinner', desc: 'An evening to savour', icon: '/icon_eat.jpg' },
+  { time: '4:00 PM', title: 'Church Ceremony', desc: "St. Joseph's Church, Wennappuwa", icon: '/icon_church.jpg' },
+  { time: '6:00 PM', title: 'Wedding & Reception', desc: 'Suriya Resort, Waikkal', icon: '/icon_eat.jpg' },
   { time: '7:30 PM', title: 'Dance', desc: 'Let the joy continue', icon: '/icon_dance.jpg' },
 ];
 

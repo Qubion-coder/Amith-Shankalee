@@ -3,9 +3,9 @@ import { Heart, MapPin, Utensils, Sparkles, Clock } from 'lucide-react';
 
 const events = [
   {
-    time: '09.15 AM',
-    title: 'Poruwa Ceremony',
-    description: 'Our wedding ceremony will begin at Shangri-La Colombo.',
+    time: '04.00 PM',
+    title: 'Wedding Ceremony',
+    description: "Our wedding ceremony will begin at St. Joseph's Church, Wennappuwa.",
     icon: MapPin,
     color: 'from-blue-500 to-blue-600'
   }
