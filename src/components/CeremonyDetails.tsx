@@ -11,8 +11,6 @@ export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both'
 
   return (
     <div className="mx-auto max-w-6xl px-6 sm:px-7">
-      {/* Premium ambient backdrop */}
-      <div className="absolute top-0 right-0 w-[80%] h-[80%] bg-gradient-radial from-brand-lavender/10 to-transparent rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative overflow-hidden rounded-[2rem] border border-[#c7a24b]/25 bg-[#fffdf8] px-6 py-12 shadow-[0_24px_65px_-45px_rgba(70,40,30,0.7)] sm:rounded-[3rem] sm:px-12 sm:py-16 lg:px-20">
         <Sparkles className="absolute right-8 top-8 h-5 w-5 text-[#c7a24b]/50" />

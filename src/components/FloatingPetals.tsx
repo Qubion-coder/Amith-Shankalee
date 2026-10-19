@@ -16,7 +16,7 @@ function getPetalCount() {
   if (typeof window === 'undefined') return 12;
   const coarse = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
   const narrow = window.innerWidth < 768;
-  if (coarse || narrow) return 10;
+  if (coarse || narrow) return 5;
   return 18;
 }
 

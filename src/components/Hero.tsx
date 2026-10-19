@@ -66,10 +66,11 @@ export const Hero: React.FC<HeroProps> = ({ event = 'both', inviteeName, onVideo
       >
         <video
           ref={videoRef}
-          src="/intro.mp4#t=0.001"
+          src="/intro.mp4"
+          poster="/intro-poster.jpg"
           className="w-full h-full object-cover"
           style={{ objectPosition: 'center 20%' }}
-          preload="auto"
+          preload="metadata"
           muted
           playsInline
           onEnded={(e) => {

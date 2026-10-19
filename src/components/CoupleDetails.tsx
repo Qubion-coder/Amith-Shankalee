@@ -5,8 +5,6 @@ import { Heart, Sparkles } from 'lucide-react';
 export const CoupleDetails: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
-      {/* Decorative ambient background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-radial from-brand-lavender/15 to-transparent rounded-full blur-[100px] pointer-events-none z-0" />
 
       <div className="text-center mb-12 sm:mb-16 relative z-10">
         <motion.div
@@ -38,7 +36,8 @@ export const CoupleDetails: React.FC = () => {
           {/* Mobile Background Image attached only to this text section */}
           <div className="absolute -top-60 sm:-top-72 inset-x-0 z-0 lg:hidden pointer-events-none flex justify-center items-center opacity-80 overflow-visible">
             <img 
-              src="/ChatGPT Image Sep 3, 2026, 03_47_52 AM.png" 
+              src="/couple-bg.webp"
+              loading="lazy" 
               alt="Mobile Background" 
               className="w-full max-w-md scale-125 sm:scale-150 h-auto object-contain mix-blend-multiply"
             />
@@ -65,7 +64,7 @@ export const CoupleDetails: React.FC = () => {
           <div className="absolute inset-8 z-10 overflow-hidden rounded-t-[12rem] rounded-b-[8rem] border border-[#c7a24b]/45 bg-[#fffdf8] shadow-[0_25px_55px_-28px_rgba(70,40,30,0.55)] sm:inset-10">
             <div className="absolute inset-3 z-20 rounded-t-[11rem] rounded-b-[7rem] border border-[#c7a24b]/30" />
             <img
-              src="/WhatsApp Image 2026-10-16 at 20.40.02.jpeg"
+              src="/couple-photo.jpg"
               alt="Amith and Shankalee"
               className="absolute inset-0 z-0 h-full w-full rounded-t-[12rem] rounded-b-[8rem] object-cover opacity-20 grayscale-[30%]"
             />

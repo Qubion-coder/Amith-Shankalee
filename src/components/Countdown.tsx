@@ -41,7 +41,7 @@ export const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
     <section className="relative overflow-hidden bg-[#365c91] px-6 py-20 text-[#fffdf8] sm:px-7 sm:py-24">
       <div className="absolute -left-24 -top-24 h-64 w-64 rounded-full border border-[#e6c77b]/20" />
       <div className="absolute -bottom-36 -right-20 h-80 w-80 rounded-full border border-[#e6c77b]/20" />
-      <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c7a24b]/10 blur-3xl" />
+      <div className="absolute left-1/2 top-1/2 hidden h-96 w-96 md:block -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c7a24b]/10 blur-3xl" />
 
       <div className="relative z-10 mx-auto max-w-5xl text-center">
         <motion.div

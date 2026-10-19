@@ -103,7 +103,7 @@ export function InvitationContent({
 
       <DeferredMount active={active} delay={520}>
         <footer className="relative mt-10 overflow-hidden border-t border-[#c7a24b]/25 bg-[#fffdf8] py-16 text-center">
-          <div className="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#365c91]/10 blur-[80px] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 hidden h-64 w-64 md:block -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#365c91]/10 blur-[80px] pointer-events-none" />
           <Heart className="mx-auto mb-6 h-6 w-6 fill-[#e6c77b]/30 text-[#c7a24b]" />
           <p className="font-names text-3xl text-[#5c3e13] sm:text-5xl">Amith & Shankalee</p>
           <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.4em] font-sans text-stone-400 font-semibold block mb-4">
